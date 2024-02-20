@@ -33,28 +33,3 @@
   args:
     chdir: "{{ sysmon_install_location }}"
   when: result.state is not defined or result.name is not defined
-
-  - name: "Install Wazuh Agent"
-  hosts: all:!goad-ansible
-  tasks:
-    - name: "Download and Install Wazuh Agent"
-      win_shell: |
-        Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.3.11-1.msi -OutFile ${env:tmp}\wazuh-agent-4.3.11.msi; msiexec.exe /i ${env:tmp}\wazuh-agent-4.3.11.msi /q WAZUH_MANAGER='192.168.56.100' WAZUH_REGISTRATION_SERVER='192.168.56.100'
-- name: "Update ossec config file and restart Wazuh Service"
-  hosts: elk_log
-  tasks:
-    - name: "Stop Wazuh Service"
-      win_service:
-        name: WazuhSvc
-        state: stopped
-
-    - name: "Copy ossec.conf file"
-      win_copy:
-        src: /opt/goad/ansible/ossec.conf
-        dest: "C:\\Program Files (x86)\\ossec-agent\\ossec.conf"
-
-    - name: "Start Wazuh Service"
-      win_service:
-        name: WazuhSvc
-        state: started
-
