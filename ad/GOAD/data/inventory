@@ -8,6 +8,7 @@ dc02
 dc03
 srv02
 srv03
+ws01
 
 ; domain controler (mandatory)
 ; usage : ad-acl.yml, ad-data.yml, ad-relations.yml, laps.yml
@@ -25,6 +26,7 @@ srv03
 ; workstation to enroll (mandatory if you want workstation)
 ; usage : ad-servers.yml, laps.yml
 [workstation]
+ws01
 
 ; parent domain controler (mandatory)
 ; usage : ad-servers.yml
@@ -88,6 +90,7 @@ dc02
 dc03
 srv02
 srv03
+ws01
 
 
 [laps_dc]
@@ -95,19 +98,27 @@ dc03
 [laps_server]
 srv03
 [laps_workstation]
+ws01
 
 ; allow computer update
 ; usage : update.yml
 [update]
 srv02
-
-; disable update
-; usage : update.yml
-[no_update]
 dc01
 dc02
 dc03
 srv03
+srv02
+ws01
+
+; disable update
+; usage : update.yml
+;[no_update]
+;dc01
+;dc02
+;dc03
+;srv03
+
 
 ; allow defender
 ; usage : security.yml
@@ -116,8 +127,9 @@ dc01
 dc02
 dc03
 srv03
+srv02
 
 ; disable defender
 ; usage : security.yml
-[defender_off]
-srv02
+;[defender_off]
+;srv02
