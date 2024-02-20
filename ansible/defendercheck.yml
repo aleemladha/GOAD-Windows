@@ -1,0 +1,99 @@
+- name: Run Windows Defender Configuration Report
+  hosts: all
+  tasks:
+    - name: Execute PowerShell Script
+      win_shell: |
+        $systemmessagecolor = "cyan"
+        $processmessagecolor = "green"
+        $errormessagecolor="red"
+
+        Clear-Host
+        Write-Host -ForegroundColor $systemmessagecolor "Script started`n"
+
+        Write-Host -ForegroundColor Gray -BackgroundColor Blue "Latest signature and engine versions"
+        $localdefender = Get-MpComputerStatus
+        Write-Host -ForegroundColor $processmessagecolor "Read latest version from web page - https://www.microsoft.com/en-us/wdsi/defenderupdates"
+        $info=Invoke-WebRequest -Uri "https://www.microsoft.com/en-us/wdsi/defenderupdates" -UseBasicParsing -DisableKeepAlive
+        Write-Host -ForegroundColor $processmessagecolor "Find values`n"
+        $check = $info.RawContent -match '<li>Version: <span>.*'
+        $ver = $Matches.values
+        $ver=$ver.replace("<li>Version: <span>","")
+        $version=$ver.replace("</span></li>","").trim()
+
+        if ($localdefender.AntispywareSignatureVersion -match $version ) {
+            Write-Host -ForegroundColor $processmessagecolor "Version:",$localdefender.AntispywareSignatureVersion
+        }
+        else {
+            for($i = 0; $i -lt $version.length; $i++) {
+                if ($version[$i] -notmatch $localdefender.AntispywareSignatureVersion[$i]) {
+                    if (-not $skip) {
+                        if ([int]::Parse($version[$i]) -lt [int]::Parse($localdefender.AntispywareSignatureVersion[$i])) {
+                            $current = $true
+                            $skip = $true
+                        } else {
+                            $current = $false
+                            $skip = $true
+                        }
+                    }
+                }
+            }
+            if ($current) {
+                Write-Host -ForegroundColor $processmessagecolor "Local version =",$localdefender.AntispywareSignatureVersion
+                Write-Host -ForegroundColor Gray "    is more current that reported latest version:",$version
+            } else {
+                Write-Host -ForegroundColor $errormessagecolor "Local version =",$localdefender.AntispywareSignatureVersion
+                Write-Host -ForegroundColor $errormessagecolor "    is less current that web latest version:",$version
+            }
+        }
+
+        $check = $info.RawContent -match '<li>Engine version: <span>.*'
+        $ver = $Matches.values
+        $ver=$ver.replace("<li>Engine Version: <span>","")
+        $engine=$ver.replace("</span></li>","").trim()
+        if ($localdefender.AMEngineVersion -match $engine ) {
+            Write-Host -ForegroundColor $processmessagecolor "Engine version =",$localdefender.AMEngineVersion
+        }
+        else {
+            Write-Host -ForegroundColor $errormessagecolor "Engine version =",$localdefender.AMEngineVersion,"["$engine"]"
+        }
+
+        $check = $info.RawContent -match '<li>Platform version: <span>.*'
+        $ver = $Matches.values
+        $ver=$ver.replace("<li>Platform Version: <span>","")
+        $platform=$ver.replace("</span></li>","").trim()
+        if ($localdefender.AMServiceVersion -like $platform ) {
+            Write-Host -ForegroundColor $processmessagecolor "Platform version =",$localdefender.AMServiceVersion
+        }
+        else {
+            Write-Host -ForegroundColor $errormessagecolor "Platform version =",$localdefender.AMServiceVersion,"["$platform"]"
+        }
+
+        $check = $info.RawContent -match '<li>Released: <span id=.*'
+        $ver = $Matches.values
+        $ver=$ver.replace('<li>Released: <span id="dateofrelease">',"")
+        $release=$ver.replace("</span></li>","").trim()
+        Write-Host -ForegroundColor $processmessagecolor "Released (UTC) =",$release
+        Write-Host -ForegroundColor Gray "    Last local update:",$localdefender.AntivirusSignatureLastUpdated
+        Write-Host -ForegroundColor $processmessagecolor "Anti-Malware Mode =",$localdefender.AMRunningMode
+        Write-Host -ForegroundColor $processmessagecolor "Anti-Malware Service enabled =",$localdefender.AMServiceEnabled
+        Write-Host -ForegroundColor $processmessagecolor "Anti-Spyware Service enabled =",$localdefender.AntispywareEnabled
+        Write-Host -ForegroundColor $processmessagecolor "Anti-Virus Service enabled =",$localdefender.AntivirusEnabled
+        Write-Host -ForegroundColor $processmessagecolor "Behavior Monitoring enabled =",$localdefender.BehaviorMonitorEnabled
+        Write-Host -ForegroundColor $processmessagecolor "Scan all downloaded files and attachments =",$localdefender.IoavProtectionEnabled
+
+        if ($localdefender.IsTamperProtected) {
+            Write-Host -ForegroundColor $processmessagecolor "Is tamper protected enabled =",$localdefender.IsTamperProtected
+        } else {
+            Write-Host -ForegroundColor $errormessagecolor "Is tamper protected enabled =",$localdefender.IsTamperProtected
+        }
+
+        Write-Host -ForegroundColor $processmessagecolor "NRI Engine enabled =",$localdefender.NISEnabled
+        Write-Host -ForegroundColor $processmessagecolor "On Access Protection enabled =",$localdefender.OnAccessProtectionEnabled
+        Write-Host -ForegroundColor $processmessagecolor "Real Time Protection enabled =",$localdefender.RealTimeProtectionEnabled
+
+        Write-Host -ForegroundColor $systemmessagecolor "`nScript completed`n"
+      register: win_defender_output
+
+    - name: Output Windows Defender Report
+      debug:
+        var: win_defender_output.stdout_lines
