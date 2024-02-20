@@ -54,5 +54,8 @@
 # --------------------------------------------------------------------
 # specifics vulns linked to the scenario are here
 - import_playbook: vulnerabilities.yml
+- import_playbook: elk.yml
+- import_playbook: wazuh.yml
+- import_playbook: ossec.yml
 
 - import_playbook: reboot.yml
