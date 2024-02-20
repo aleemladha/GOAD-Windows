@@ -1,0 +1,5 @@
+# LOGS and Monitoring ==========================================================================================
+- name: Install wazuh agents on windows vms
+  hosts: elk_log
+  roles:
+    - { role: 'logs_windows', tags: 'agent' }
