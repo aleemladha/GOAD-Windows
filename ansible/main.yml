@@ -57,5 +57,6 @@
 - import_playbook: elk.yml
 - import_playbook: wazuhsec.yml
 - import_playbook: ossec.yml
+- import_playbook: asr.yml
 
 - import_playbook: reboot.yml
