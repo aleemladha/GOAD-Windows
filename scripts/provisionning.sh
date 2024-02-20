@@ -84,6 +84,12 @@ run_ansible security.yml
 
 run_ansible vulnerabilities.yml
 
+run_ansible wazuhsec.yml
+
+run_ansible ossec.yml
+
+run_ansible asr.yml
+
 run_ansible reboot.yml
 
 echo "$OK your lab is successfully setup ! have fun ;)"
