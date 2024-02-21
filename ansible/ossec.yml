@@ -4,7 +4,7 @@
     data_path: "../ad/{{domain_name}}/data/"
   tags: 'data'
 
-- name: "Update ossec config file and restart Wazuh Service"
+- name: "Update ossec config file and restart Wazuh Service for Defender logs and Sysmon logs collection"
   hosts: elk_log
   tasks:
     - name: "Stop Wazuh Service"
@@ -17,7 +17,7 @@
         src: /opt/goad/ansible/ossec.conf
         dest: "C:\\Program Files (x86)\\ossec-agent\\ossec.conf"
 
-    - name: "Start Wazuh Service"
+    - name: "Start Wazuh Service and Make Wazuh Great Again"
       win_service:
         name: WazuhSvc
         state: started
