@@ -103,7 +103,7 @@ boxes = [
 		if box[:name] == "GOAD-ANSIBLE"
           target.vm.provision "shell", inline: <<-SHELL
             # Install Wazuh manager
-            curl -sO https://packages.wazuh.com/4.3/wazuh-install.sh
+            curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
             sudo bash ./wazuh-install.sh -a -i
 
             # Start Wazuh manager
