@@ -128,6 +128,7 @@ dc02
 dc03
 srv03
 srv02
+ws01
 
 ; disable defender
 ; usage : security.yml
