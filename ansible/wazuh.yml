@@ -6,7 +6,7 @@
 
 
 - name: "Install Wazuh Agent"
-  hosts: all:!goad-ansible:elk
+  hosts: all:!goad-ansible:!elk
   tasks:
     - name: "Download and Install Wazuh Agent"
       win_shell: |
