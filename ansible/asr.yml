@@ -1,0 +1,10 @@
+- name: Run ASR PowerShell script on dc01
+  hosts: dc01
+  tasks:
+    - name: Transfer ASR PowerShell script to remote host
+      win_copy:
+        src: /opt/goad/ansible/asr.ps1
+        dest: C:\macro.ps1
+
+    - name: Run PowerShell script
+      win_shell: powershell.exe -ExecutionPolicy Bypass -File C:\macro.ps1
