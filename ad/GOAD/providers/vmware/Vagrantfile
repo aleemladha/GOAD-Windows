@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'vmware_desktop'
 
 boxes = [
-
+  { :name => "GOAD-KALI", :ip => "192.168.56.200", :box => "kalilinux/rolling", :forwarded_port => [ {:guest => 22, :host => 2310, :id => "ssh"} ] },
   { :name => "GOAD-DC01",  :ip => "192.168.56.10", :box => "StefanScherer/windows_2019", :box_version => "2021.05.15", :os => "windows", :memory => 8048},
   { :name => "GOAD-DC02",  :ip => "192.168.56.11", :box => "StefanScherer/windows_2019", :box_version => "2021.05.15", :os => "windows", :memory => 2048},
   { :name => "GOAD-DC03",  :ip => "192.168.56.12", :box => "StefanScherer/windows_2019", :box_version => "2021.05.15", :os => "windows", :memory => 2048},
@@ -12,6 +12,7 @@ boxes = [
   { :name => "GOAD-SRV03", :ip => "192.168.56.23", :box => "StefanScherer/windows_2019", :box_version => "2021.05.15", :os => "windows", :memory => 4096},
   { :name => "GOAD-WS01", :ip => "192.168.56.30", :box => "mayfly/windows10", :os => "windows"},
   { :name => "GOAD-ANSIBLE", :ip => "192.168.56.100", :box => "bento/ubuntu-22.04", :os => "linux", :forwarded_port => [ {:guest => 22, :host => 2210, :id => "ssh"} ] }
+  
    #ELK
  #{ :name => "elk", :ip => "192.168.56.50", :box => "bento/ubuntu-22.04", :os => "linux", :forwarded_port => [  {:guest => 22, :host => 2210, :id => "ssh"} ] }
 ]
@@ -157,7 +158,7 @@ git clone https://github.com/aleemladha/GOAD-Windows /opt/goad
 
 # Download .Net Framework, cant upload this to the git due to the size
 
-wget -O /opt/goad/ansible/ndp48-x86-x64-allos-enu.exe https://download.visualstudio.microsoft.com/download/pr/2d6bb6b2-226a-4baa-bdec-798822606ff1/8494001c276a4b96804cde7829c04d7f/ndp48-x86-x64-allos-enu.exe
+#wget -O /opt/goad/ansible/ndp48-x86-x64-allos-enu.exe https://download.visualstudio.microsoft.com/download/pr/2d6bb6b2-226a-4baa-bdec-798822606ff1/8494001c276a4b96804cde7829c04d7f/ndp48-x86-x64-allos-enu.exe
 
 # Set up prerequisites
 pip install --upgrade pip && pip install ansible-core==2.12.6 && pip install pywinrm
