@@ -1,0 +1,117 @@
+<user-mapping>
+    <authorize username="vagrant" password="vagrant">
+        <connection name="GOAD-KALI">
+            <protocol>ssh</protocol>
+            <param name="hostname">192.168.56.200</param>
+            <param name="port">22</param>
+            <param name="username">vagrant</param>
+            <param name="password">vagrant</param>
+        </connection>
+		
+		<connection name="logger">
+            <protocol>ssh</protocol>
+            <param name="hostname">192.168.56.105</param>
+            <param name="port">22</param>
+            <param name="username">vagrant</param>
+            <param name="password">vagrant</param>
+        </connection>
+
+        <connection name="GOAD-DC01">
+            <protocol>rdp</protocol>
+            <param name="hostname">192.168.56.10</param>
+            <param name="port">3389</param>
+            <param name="username">vagrant</param>
+            <param name="password">vagrant</param>
+            <param name="create-drive-path">true</param>
+            <param name="enable-drive">true</param>
+            <param name="drive-path">/etc/guacamole/shares/wef</param>
+            <param name="security">nla</param>
+            <param name="ignore-cert">true</param>
+        </connection>
+
+        <connection name="GOAD-DC02">
+            <protocol>rdp</protocol>
+            <param name="hostname">192.168.56.11</param>
+            <param name="port">3389</param>
+            <param name="username">vagrant</param>
+            <param name="password">vagrant</param>
+            <param name="create-drive-path">true</param>
+            <param name="enable-drive">true</param>
+            <param name="drive-path">/etc/guacamole/shares/wef</param>
+            <param name="security">nla</param>
+            <param name="ignore-cert">true</param>
+        </connection>
+
+
+        <connection name="GOAD-DC03">
+            <protocol>rdp</protocol>
+            <param name="hostname">192.168.56.12</param>
+            <param name="port">3389</param>
+            <param name="username">vagrant</param>
+            <param name="password">vagrant</param>
+            <param name="create-drive-path">true</param>
+            <param name="enable-drive">true</param>
+            <param name="drive-path">/etc/guacamole/shares/wef</param>
+            <param name="security">nla</param>
+            <param name="ignore-cert">true</param>
+        </connection>
+
+
+        <connection name="GOAD-SRV02">
+            <protocol>rdp</protocol>
+            <param name="hostname">192.168.56.22</param>
+            <param name="port">3389</param>
+            <param name="username">vagrant</param>
+            <param name="password">vagrant</param>
+            <param name="create-drive-path">true</param>
+            <param name="enable-drive">true</param>
+            <param name="drive-path">/etc/guacamole/shares/wef</param>
+            <param name="security">nla</param>
+            <param name="ignore-cert">true</param>
+        </connection>
+
+
+        <connection name="GOAD-SRV03">
+            <protocol>rdp</protocol>
+            <param name="hostname">192.168.56.23</param>
+            <param name="port">3389</param>
+            <param name="username">vagrant</param>
+            <param name="password">vagrant</param>
+            <param name="create-drive-path">true</param>
+            <param name="enable-drive">true</param>
+            <param name="drive-path">/etc/guacamole/shares/wef</param>
+            <param name="security">nla</param>
+            <param name="ignore-cert">true</param>
+        </connection>
+		
+        <connection name="GOAD-WS01">
+            <protocol>rdp</protocol>
+            <param name="hostname">192.168.56.30</param>
+            <param name="port">3389</param>
+            <param name="username">vagrant</param>
+            <param name="password">vagrant</param>
+            <param name="create-drive-path">true</param>
+            <param name="enable-drive">true</param>
+            <param name="drive-path">/etc/guacamole/shares/wef</param>
+            <param name="security">nla</param>
+            <param name="ignore-cert">true</param>
+        </connection>		
+
+        
+
+        <connection name="DC - Domain Admin">
+            <protocol>rdp</protocol>
+            <param name="hostname">192.168.56.10</param>
+            <param name="port">3389</param>
+            <param name="username">vagrant</param>
+            <param name="password">vagrant</param>
+            <param name="domain">sevenkingdoms</param>
+            <param name="create-drive-path">true</param>
+            <param name="enable-drive">true</param>
+            <param name="drive-path">/etc/guacamole/shares/dc</param>
+            <param name="security">nla</param>
+            <param name="ignore-cert">true</param>
+        </connection>
+
+    </authorize>
+</user-mapping>
