@@ -43,6 +43,24 @@
             "scripts" : [],
             "vulns" : ["disable_firewall"]
         },
+        "Collector" : {
+            "hostname" : "collector",
+            "type" : "server",
+            "local_admin_password": "EP+xh7Rk6j90",
+            "domain" : "sevenkingdoms.local",
+            "path" : "DC=sevenkingdoms,DC=local",
+            "local_groups" : {
+                "Administrators" : [
+                    "sevenkingdoms\\tywin.lannister",
+                    "sevenkingdoms\\jaime.lannister"
+                ]
+            },
+            "Remote Desktop Users" : [
+                "sevenkingdoms\\Lanister"
+            ],
+            "scripts" : [],
+            "vulns" : ["disable_firewall"]
+        },
         "dc02" : {
             "hostname" : "winterfell",
             "type" : "dc",
