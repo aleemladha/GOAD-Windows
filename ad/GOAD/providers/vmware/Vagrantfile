@@ -4,7 +4,8 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = 'vmware_desktop'
 
 boxes = [
   { :name => "GOAD-KALI", :ip => "192.168.56.200", :box => "kalilinux/rolling", :forwarded_port => [ {:guest => 22, :host => 2310, :id => "ssh"} ] },
-  { :name => "GOAD-DC01",  :ip => "192.168.56.10", :box => "StefanScherer/windows_2019", :box_version => "2021.05.15", :os => "windows", :memory => 8048},
+  { :name => "GOAD-Collector",  :ip => "192.168.56.2", :box => "StefanScherer/windows_2019", :box_version => "2021.05.15", :os => "windows", :memory => 4048},
+  { :name => "GOAD-DC01",  :ip => "192.168.56.10", :box => "StefanScherer/windows_2019", :box_version => "2021.05.15", :os => "windows", :memory => 2048},
   { :name => "GOAD-DC02",  :ip => "192.168.56.11", :box => "StefanScherer/windows_2019", :box_version => "2021.05.15", :os => "windows", :memory => 2048},
   { :name => "GOAD-DC03",  :ip => "192.168.56.12", :box => "StefanScherer/windows_2019", :box_version => "2021.05.15", :os => "windows", :memory => 2048},
   #{ :name => "GOAD-EXC01", :ip => "192.168.56.15", :box => "StefanScherer/windows_2019", :box_version => "2021.05.15", :os => "windows", :memory => 8048}, 
