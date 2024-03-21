@@ -23,6 +23,7 @@ dc03
 [server]
 srv02
 srv03
+Collector
 
 ; workstation to enroll (mandatory if you want workstation)
 ; usage : ad-servers.yml, laps.yml
