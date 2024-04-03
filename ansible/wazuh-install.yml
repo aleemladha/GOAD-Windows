@@ -16,6 +16,14 @@
         name: wazuh-manager
         state: started
         enabled: yes
+        
+    - name: Lets Make Wazuh Great Again SOCFORTRESS way
+      get_url:
+        url: https://raw.githubusercontent.com/aaladha/Wazuh-Rules/main/wazuh_socfortress_rules.sh
+        dest: /tmp/wazuh_socfortress_rules.sh    
+     
+    - name: Run Wazuh SOCFORTRESS script
+      shell: sudo bash /tmp/wazuh_socfortress_rules.sh 
     
     - name: You can access the web interface https://<wazuh-dashboard-ip>:443 with creds below
       shell: "grep -E 'User:|Password:' /tmp/wazuh-install-output.txt | awk '{print $NF}'"
@@ -26,3 +34,5 @@
         msg:
           - "Username: {{ access_info.stdout_lines[0] }}"
           - "Password: {{ access_info.stdout_lines[1] }}" 
+          
+    
